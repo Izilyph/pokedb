@@ -1,0 +1,49 @@
+version: "3"
+services:
+  app:
+    build: .
+    depends_on:
+      - database
+    ports:
+      - "8081:8081"
+    networks:
+      - skynet
+
+  image2:
+    build: 
+      context: .
+      dockerfile: DockerfileImage2
+    depends_on:
+      - database
+    ports:
+      - "8082:8081"
+    networks:
+      - skynet   
+  
+  database:
+    image: mysql:latest
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql 
+      - ./datab:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "9000:3306"
+    networks:
+      - skynet
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./loadbalancer/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+      - image2
+    networks:
+      - skynet
+
+networks:
+  skynet:

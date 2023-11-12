@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <title>Pokédb</title>
+    </head>
+    
+    <body>
+        <header>
+            <h1>Pokédb</h1>
+        </header>
+        <nav>
+            <a href="{{ url_for('render_pokedex') }}">Pokedex 5G</a>
+            <a href="{{ url_for('render_types') }}">Table des types</a>
+            <a href="{{ url_for('render_capacity') }}">Capacités</a>
+        </nav>
+        <main class="container">
+            <img class="wallpaper" src="../static/images/bw.webp" width="70%">
+        </main>
+    </body>
+</html>

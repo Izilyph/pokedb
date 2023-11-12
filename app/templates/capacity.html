@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pokédb</title>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <header>
+            <h1>Pokédb</h1>
+        </header>
+        <nav>
+            <a href="{{ url_for('return_home') }}">Accueil</a>
+            <a href="{{ url_for('render_pokedex') }}">Pokedex 5G</a>
+            <a href="{{ url_for('render_types') }}">Table des types</a>
+            <a href="{{ url_for('render_capacity') }}"></a>
+        </nav>
+        <main>
+            <h2>Capacités</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Catégorie</th>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Puissance</th>
+                        <th>Précision</th>
+                        <th>PP</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for capacity in data %}
+                        <tr>
+                            <td><img src="{{capacity['category']}}" width="100"></td>
+                            <td>{{capacity['capacity_name']}}</td>
+                            <td><img src="{{capacity['capacity_type']}}" width="100"></td>
+                            <td>{{capacity['power']}}</td>
+                            <td>{{capacity['accuracy']}}</td>
+                            <td>{{capacity['pp']}}</td>
+                            <td>{{capacity['capacity_desc']}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+    </body>
+</html>

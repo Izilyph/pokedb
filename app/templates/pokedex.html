@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pokédb</title>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <header>
+            <h1>Pokédb</h1>
+        </header>
+        <nav>
+            <a href="{{ url_for('return_home') }}">Accueil</a>
+            <a href="{{ url_for('render_types') }}">Table des types</a>
+            <a href="{{ url_for('render_capacity') }}">Capacités</a>
+        </nav>
+        
+        
+        <main>
+            <h2>Pokémons</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Nom</th>
+                        <th>Image</th>
+                        <th>Type</th>
+                        <th>Pv</th>
+                        <th>Atk</th>
+                        <th>Def</th>
+                        <th>Atk spé</th>
+                        <th>Def spé</th>
+                        <th>Vit</th>
+                        <th>Talent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pokemon in data %}
+                        <tr>
+                            <td>{{pokemon['dex_number']}}</td>
+                            <td>{{pokemon['pokemon_name']}}</td>
+                            <td><img src="{{pokemon['icon']}}" width="100"></td>
+                            <td>
+                                <div class="stacked-elements">{{pokemon['pokemon_type1']}}</div> 
+                                {% if pokemon['pokemon_type2'] is not none %}
+                                <div class="stacked-elements">{{pokemon['pokemon_type2']}}</div>
+                                {% endif %}
+                            </td>
+                            <td>{{pokemon['pv_stat']}}</td>
+                            <td>{{pokemon['atk_stat']}}</td>
+                            <td>{{pokemon['def_stat']}}</td>
+                            <td>{{pokemon['atk_spe_stat']}}</td>
+                            <td>{{pokemon['def_spe_stat']}}</td>
+                            <td>{{pokemon['speed_stat']}}</td>
+                            <td>
+                                <div class="stacked-elements">{{pokemon['talent1']}} </div>
+                                {% if pokemon['talent2'] is not none %}
+                                <div class="stacked-elements">{{pokemon['talent2']}}</div> 
+                                {% endif %}
+                                {% if pokemon['talent3'] is not none %}
+                                <div class="stacked-elements">{{pokemon['talent3']}}</div>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+    </body>
+</html>
